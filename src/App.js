@@ -19,13 +19,26 @@ class App extends React.Component {
       task: event.target.value,
     })
   }
+
+  addTodoHandler = () => {
+    const todo = {
+      task: this.state.task,
+      id: Date.now(),
+      completed: false
+    }
+
+    this.setState({
+      allTodos: this.state.allTodos.concat(todo),
+      task: ''
+    })
+  }
   
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList allTodos={this.state.allTodos} />
-        <TodoForm task={this.state.task} todoInputHandler={this.todoInputHandler} />
+        <TodoForm task={this.state.task} todoInputHandler={this.todoInputHandler} addTodoHandler={this.addTodoHandler} />
       </div>
     );
   }
