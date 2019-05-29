@@ -1,6 +1,11 @@
 import React from 'react'
 
-export default function TodoForm({ task, todoInputHandler, addTodoHandler, clearCompletedTodoHandler }) {
+export default function TodoForm({
+  task,
+  todoInputHandler,
+  addTodoHandler,
+  clearCompletedTodoHandler
+}) {
   return (
     <div>
       <input
