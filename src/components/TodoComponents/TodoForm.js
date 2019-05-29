@@ -11,6 +11,7 @@ export default function TodoForm({
       <input
         type='text'
         value={task}
+        placeholder='I want to ...'
         onChange={todoInputHandler}
       />
       <button
