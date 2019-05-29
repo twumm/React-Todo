@@ -10,8 +10,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       allTodos: [],
-      todo: '',
+      task: '',
     }
+  }
+
+  todoInputHandler = (event) => {
+    this.setState({
+      task: event.target.value,
+    })
   }
   
   render() {
@@ -19,7 +25,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList allTodos={this.state.allTodos} />
-        <TodoForm />
+        <TodoForm task={this.state.task} todoInputHandler={this.todoInputHandler} />
       </div>
     );
   }
