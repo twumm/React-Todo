@@ -75,8 +75,7 @@ class App extends React.Component {
           this.state.searchPhrase ? 
           <TodoSearchResultsList searchResults={this.state.searchResults} />
           :
-          null
-          // <TodoList allTodos={this.state.allTodos} />
+          <TodoList allTodos={this.state.allTodos} />
         }
         <TodoForm
           task={this.state.task}
