@@ -47,6 +47,11 @@ class App extends React.Component {
       searchResults: results,
     })
   }
+
+  persistToLocalStorage = (items) => {
+    let todoStorage = window.localStorage;
+    todoStorage.setItem('allTodos', JSON.stringify(items));
+  }
   
   render() {
     return (
@@ -61,13 +66,14 @@ class App extends React.Component {
           this.state.searchPhrase ? 
           <TodoSearchResultsList searchResults={this.state.searchResults} />
           :
-          <TodoList allTodos={this.state.allTodos} />
+          <TodoList allTodos={JSON.parse(localStorage.getItem('allTodos')) || this.state.allTodos} />
         }
         <TodoForm
           task={this.state.task}
           todoInputHandler={this.todoInputHandler}
           addTodoHandler={this.addTodoHandler}
         />
+        {this.state.allTodos.length > 0 && this.persistToLocalStorage(this.state.allTodos)}
       </div>
     );
   }
