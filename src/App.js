@@ -35,15 +35,14 @@ class App extends React.Component {
   }
 
   searchTodoHandler = (event) => {
-    // Get phrase directly from input
     const searchPhraseCap = event.target.value.toUpperCase();
-    // Set phrase as user enters
+
     this.setState({
       searchPhrase: event.target.value,
-    })
-    // Filter allTodos, returning cases which are valid
+    });
+
     const results = this.state.allTodos.filter(todo => todo.task.toUpperCase().indexOf(searchPhraseCap) > -1);
-    // Set searchResults to filter results
+
     this.setState({
       searchResults: results,
     })
