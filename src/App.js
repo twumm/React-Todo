@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import TodoSearch from './components/TodoComponents/TodoSearch';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,9 @@ class App extends React.Component {
     return (
       <div>
         <h2>Le ToDo</h2>
+        {
+          this.state.allTodos.length > 0 && <TodoSearch />
+        }
         <TodoList allTodos={this.state.allTodos} />
         <TodoForm
           task={this.state.task}
