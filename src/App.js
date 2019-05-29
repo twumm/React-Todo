@@ -2,6 +2,7 @@ import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoSearch from './components/TodoComponents/TodoSearch';
+import TodoSearchResultsList from './components/TodoComponents/TodoSearchResultsList';
 
 const todosList = [
   {
@@ -47,12 +48,14 @@ class App extends React.Component {
   }
 
   searchTodoHandler = (event) => {
+    // Get phrase directly from input
+    const searchPhraseCap = event.target.value.toUpperCase();
     // Set phrase as user enters
     this.setState({
       searchPhrase: event.target.value,
     })
     // Filter allTodos, returning cases which are valid
-    const results = this.state.allTodos.filter(todo => todo.task.search(this.state.searchPhrase) >= 0);
+    const results = this.state.allTodos.filter(todo => todo.task.toUpperCase().indexOf(searchPhraseCap) > -1);
     // Set searchResults to filter results
     this.setState({
       searchResults: results,
@@ -68,7 +71,13 @@ class App extends React.Component {
           &&
           <TodoSearch searchTodoHandler={this.searchTodoHandler} />
         }
-        <TodoList allTodos={this.state.allTodos} />
+        {
+          this.state.searchPhrase ? 
+          <TodoSearchResultsList searchResults={this.state.searchResults} />
+          :
+          null
+          // <TodoList allTodos={this.state.allTodos} />
+        }
         <TodoForm
           task={this.state.task}
           todoInputHandler={this.todoInputHandler}
