@@ -51,10 +51,8 @@ class App extends React.Component {
     this.setState({
       searchPhrase: event.target.value,
     })
-
     // Filter allTodos, returning cases which are valid
-    const results = this.state.allTodos.filter(todo => todo.task.search(this.state.searchPhrase) >= 0)
-
+    const results = this.state.allTodos.filter(todo => todo.task.search(this.state.searchPhrase) >= 0);
     // Set searchResults to filter results
     this.setState({
       searchResults: results,
