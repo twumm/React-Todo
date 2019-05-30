@@ -73,6 +73,17 @@ class App extends React.Component {
       localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
       })
   }
+
+  clearCompletedTodoHandler = () => {
+    const filteredTodo = this.state.allTodos
+      .filter(todo => !todo.completed)
+
+    this.setState({
+      allTodos: filteredTodo,
+    }, () => {
+      localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
+      })
+  }
   
   render() {
     return (
@@ -93,6 +104,7 @@ class App extends React.Component {
           task={this.state.task}
           todoInputHandler={this.todoInputHandler}
           addTodoHandler={this.addTodoHandler}
+          clearCompletedTodoHandler={this.clearCompletedTodoHandler}
         />
       </div>
     );
