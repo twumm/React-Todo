@@ -43,14 +43,12 @@ class App extends React.Component {
   searchTodoHandler = (event) => {
     const searchPhraseCap = event.target.value.toUpperCase();
 
-    this.setState({
-      searchPhrase: event.target.value,
-    });
-
-    const results = this.state.allTodos.filter(todo => todo.task.toUpperCase().indexOf(searchPhraseCap) > -1);
+    const results = this.state.allTodos
+      .filter(todo => todo.task.toUpperCase().indexOf(searchPhraseCap) > -1);
 
     this.setState({
       searchResults: results,
+      searchPhrase: event.target.value,
     })
   }
 
@@ -72,7 +70,7 @@ class App extends React.Component {
           <TodoSearch searchTodoHandler={this.searchTodoHandler} />
         }
         {
-          this.state.searchPhrase ? 
+          this.state.searchPhrase ?
           <TodoSearchResultsList searchResults={this.state.searchResults} />
           :
           <TodoList allTodos={this.state.allTodos} />
@@ -82,7 +80,6 @@ class App extends React.Component {
           todoInputHandler={this.todoInputHandler}
           addTodoHandler={this.addTodoHandler}
         />
-        {/* {this.state.allTodos.length > 0 && this.persistToLocalStorage(this.state.allTodos)} */}
       </div>
     );
   }
