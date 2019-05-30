@@ -117,3 +117,8 @@
   cursor: pointer;
 }
 
+/* TodoList.js */
+.todo-question {
+  font-size: 1.5rem;
+  color: rgb(173, 173, 173);
+}

@@ -55,3 +55,10 @@ html, body {
   font-family: 'Roboto', sans-serif;
   background: #FAFAFA;
 }
+
+@media only screen and (min-width: 501px) {
+  #root {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
