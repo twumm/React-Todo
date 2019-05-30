@@ -26,11 +26,11 @@ class App extends React.Component {
   }
 
   addTodoHandler = () => {
-    const todo = [{
+    const todo = {
       task: this.state.task,
       id: Date.now(),
       completed: false
-    }]
+    };
 
     this.setState({
       allTodos: this.state.allTodos.concat(todo),
