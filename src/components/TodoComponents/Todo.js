@@ -6,7 +6,11 @@ export default function Todo({ todo, completeTodoHandler }) {
   };
 
   return (
-    <div onClick={completeTodo}>
+    <div
+      onClick={completeTodo}
+      style={todo.completed 
+        ? {textDecoration: 'line-through'}
+        : {textDecoration: ''}}>
       {todo.task}
     </div>
   )
