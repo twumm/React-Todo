@@ -12,14 +12,16 @@ export default function TodoForm({
   }
 
   return (
-    <div>
+    <div className='form-field'>
       <input
+        id='enter-todo'
         type='text'
         value={task}
         placeholder='I want to ...'
         onChange={todoInputHandler}
       />
       <button
+        id='submit-todo'
         onClick={addTodoHandler}
       >
         Add Todo

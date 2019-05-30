@@ -1,4 +1,5 @@
 import React from 'react'
+import './Todo.css'
 
 export default function Todo({ todo, completeTodoHandler }) {
   const completeTodo = () => {
@@ -7,11 +8,18 @@ export default function Todo({ todo, completeTodoHandler }) {
 
   return (
     <div
-      onClick={completeTodo}
-      style={todo.completed 
+      className='todo-item'
+      style={todo.completed
         ? {textDecoration: 'line-through'}
         : {textDecoration: ''}}>
-      {todo.task}
+      <label className="todo-label">
+        <input type='checkbox'
+          className='todo-input-text'
+          onClick={completeTodo}
+        />{todo.task}
+        <span className='checkmark'></span>
+      </label>
     </div>
+  
   )
 }

@@ -3,6 +3,7 @@ import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoSearch from './components/TodoComponents/TodoSearch';
 import TodoSearchResultsList from './components/TodoComponents/TodoSearchResultsList';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -87,8 +88,8 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
-        <h2>Le ToDo</h2>
+      <div className='app-container'>
+        <div id='todo-title' data-text="Title" contentEditable></div>
         {
           this.state.allTodos.length > 0
           &&

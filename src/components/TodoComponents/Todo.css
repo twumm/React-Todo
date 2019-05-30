@@ -1,0 +1,84 @@
+/* .todo-item {
+  font-size: 2rem;
+  margin: 10px 0 5px 10px;
+} */
+
+.todo-item .todo-label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.todo-item 
+.todo-label
+.todo-input-text {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.todo-item 
+.todo-label
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+.todo-item:hover
+.todo-input-text ~ .checkmark {
+  border: 1px solid black;
+}
+
+.todo-item
+.todo-input-text:checked ~ .checkmark {
+  background-color: rgb(231, 231, 231);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.todo-item
+.todo-input-text:checked ~ .checkmark:after {
+  display: block;
+}
+
+.todo-item .checkmark:after {
+  left: 2px;
+  top: 0;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+/* .checkmark {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  background-color: white;
+} */
