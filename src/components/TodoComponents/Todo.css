@@ -10,7 +10,7 @@
   margin-bottom: 15px;
   margin-top: 15px;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.8rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -62,7 +62,7 @@
   display: block;
 }
 
-.todo-item .checkmark:after {
+/* .todo-item .checkmark:after {
   left: 2px;
   top: 0;
   width: 4px;
@@ -72,13 +72,16 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-
-
-
-/* .checkmark {
-  cursor: pointer;
-  height: 25px;
-  width: 25px;
-  background-color: white;
 } */
+
+/* Search styles */
+.search-bar input {
+  width: 80%;
+  padding-left: 5px;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid rgb(95, 95, 95);
+  background: none;
+  font-size: 1.5rem;
+  outline: none;
+}
