@@ -15,6 +15,10 @@ class App extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.getAllTodosFromLocalStorage();
+  }
+
   todoInputHandler = (event) => {
     this.setState({
       task: event.target.value,
@@ -22,16 +26,18 @@ class App extends React.Component {
   }
 
   addTodoHandler = () => {
-    const todo = {
+    const todo = [{
       task: this.state.task,
       id: Date.now(),
       completed: false
-    }
+    }]
 
     this.setState({
       allTodos: this.state.allTodos.concat(todo),
       task: ''
-    })
+    }, () => {
+      localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
+      })
   }
 
   searchTodoHandler = (event) => {
@@ -48,9 +54,12 @@ class App extends React.Component {
     })
   }
 
-  persistToLocalStorage = (items) => {
-    let todoStorage = window.localStorage;
-    todoStorage.setItem('allTodos', JSON.stringify(items));
+  getAllTodosFromLocalStorage = () => {
+    const allTodos = JSON.parse(localStorage.getItem('allTodos')) || [];
+
+    this.setState({
+      allTodos: allTodos,
+    })
   }
   
   render() {
@@ -66,14 +75,14 @@ class App extends React.Component {
           this.state.searchPhrase ? 
           <TodoSearchResultsList searchResults={this.state.searchResults} />
           :
-          <TodoList allTodos={JSON.parse(localStorage.getItem('allTodos')) || this.state.allTodos} />
+          <TodoList allTodos={this.state.allTodos} />
         }
         <TodoForm
           task={this.state.task}
           todoInputHandler={this.todoInputHandler}
           addTodoHandler={this.addTodoHandler}
         />
-        {this.state.allTodos.length > 0 && this.persistToLocalStorage(this.state.allTodos)}
+        {/* {this.state.allTodos.length > 0 && this.persistToLocalStorage(this.state.allTodos)} */}
       </div>
     );
   }
