@@ -59,6 +59,20 @@ class App extends React.Component {
       allTodos: allTodos,
     })
   }
+
+  completeTodoHandler = todoId => {
+    this.setState({
+      allTodos: this.state.allTodos
+        .map(todo => {
+          if (todo.id === todoId) {
+            !todo.completed ? todo.completed = true : todo.completed = false;
+          };
+          return todo;
+        })
+    }, () => {
+      localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
+      })
+  }
   
   render() {
     return (
@@ -71,9 +85,9 @@ class App extends React.Component {
         }
         {
           this.state.searchPhrase ?
-          <TodoSearchResultsList searchResults={this.state.searchResults} />
+          <TodoSearchResultsList searchResults={this.state.searchResults} completeTodoHandler={this.completeTodoHandler} />
           :
-          <TodoList allTodos={this.state.allTodos} />
+          <TodoList allTodos={this.state.allTodos} completeTodoHandler={this.completeTodoHandler} />
         }
         <TodoForm
           task={this.state.task}
