@@ -6,6 +6,11 @@ export default function TodoForm({
   addTodoHandler,
   clearCompletedTodoHandler
 }) {
+
+  const clearTodos = () => {
+    clearCompletedTodoHandler();
+  }
+
   return (
     <div>
       <input
@@ -20,7 +25,7 @@ export default function TodoForm({
         Add Todo
       </button>
       <button
-        onClick={clearCompletedTodoHandler}
+        onClick={clearTodos}
       >
         Clear Completed
       </button>
