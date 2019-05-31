@@ -6,24 +6,34 @@ export default function TodoForm({
   addTodoHandler,
   clearCompletedTodoHandler
 }) {
+
+  const clearTodos = () => {
+    clearCompletedTodoHandler();
+  }
+
   return (
-    <div>
+    <div className='form-field'>
       <input
+        id='enter-todo'
         type='text'
+        autoFocus
         value={task}
         placeholder='I want to ...'
         onChange={todoInputHandler}
       />
-      <button
-        onClick={addTodoHandler}
-      >
-        Add Todo
-      </button>
-      <button
-        onClick={clearCompletedTodoHandler}
-      >
-        Clear Completed
-      </button>
+      <div id='button-div'>
+        <button
+          id='submit-todo'
+          onClick={addTodoHandler}
+        >
+          Add Todo
+        </button>
+        <button
+          onClick={clearTodos}
+        >
+          Clear Completed
+        </button>
+      </div>
     </div>
   )
 }
