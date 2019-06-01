@@ -1,5 +1,6 @@
 .app-container {
-  margin: auto 50px;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .app-container #todo-title {
