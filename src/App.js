@@ -1,29 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
-import TodoSearch from './components/TodoComponents/TodoSearch';
-import TodoSearchResultsList from './components/TodoComponents/TodoSearchResultsList';
 import './App.css';
 
 function App() {
-  const sampleTodo = [
-    {
-      task: 'Organize Garage',
-      id: 1528817077286,
-      completed: false
-    },
-    {
-      task: 'Bake Cookies',
-      id: 1528817084358,
-      completed: false
-    }
-  ];
 
   useEffect(() => {
     getAllTodosFromLocalStorage();
   })
 
-  const [allTodos, addTodos] = useState(sampleTodo);
+  const [allTodos, addTodos] = useState([]);
   const [task, setTask] = useState('');
 
   const todoInputHandler = (event) => {
