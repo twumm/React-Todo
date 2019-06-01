@@ -1,7 +1,10 @@
-/* .todo-item {
-  font-size: 2rem;
-  margin: 10px 0 5px 10px;
-} */
+/* Todo.js */
+
+.todo-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .todo-item .todo-label {
   display: block;
@@ -121,4 +124,5 @@
 .todo-question {
   font-size: 1.5rem;
   color: rgb(173, 173, 173);
+  margin-bottom: 10px;
 }
