@@ -27,6 +27,7 @@ export default function Todo({ todo, completeTodoHandler, removeCompletedTodo })
       </div>
 
       <div
+        className='remove-todo'
         onClick={removeTodo}
       >
         <h1>X</h1>
