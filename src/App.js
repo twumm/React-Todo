@@ -1,115 +1,80 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
-import TodoSearch from './components/TodoComponents/TodoSearch';
-import TodoSearchResultsList from './components/TodoComponents/TodoSearchResultsList';
 import './App.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      allTodos: [],
-      task: '',
-      searchPhrase: '',
-      searchResults: []
-    }
+function App() {
+
+  useEffect(() => {
+    getAllTodosFromLocalStorage();
+  })
+
+  const [allTodos, addTodos] = useState([]);
+  const [task, setTask] = useState('');
+
+  const todoInputHandler = (event) => {
+    const newTask = event.target.value
+    setTask(newTask);
   }
 
-  componentWillMount() {
-    this.getAllTodosFromLocalStorage();
-  }
-
-  todoInputHandler = (event) => {
-    this.setState({
-      task: event.target.value,
-    })
-  }
-
-  addTodoHandler = () => {
+  const addTodoHandler = () => {
     const todo = {
-      task: this.state.task,
+      task: task,
       id: Date.now(),
       completed: false
     };
 
-    this.setState({
-      allTodos: this.state.allTodos.concat(todo),
-      task: ''
-    }, () => {
-      localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
-      })
+    const newAllTodos = allTodos.concat(todo);
+
+    addTodos(newAllTodos);
+    setTask('')
+    saveAllTodosToLocalStorage(newAllTodos);
   }
 
-  searchTodoHandler = (event) => {
-    const searchPhraseCap = event.target.value.toUpperCase();
-
-    const results = this.state.allTodos
-      .filter(todo => todo.task.toUpperCase().indexOf(searchPhraseCap) > -1);
-
-    this.setState({
-      searchResults: results,
-      searchPhrase: event.target.value,
+  const completeTodoHandler = (todoId) => {
+    const newAllTodos = allTodos.map(todo => {
+      if (todo.id === todoId) {
+        !todo.completed ? todo.completed = true : todo.completed = false;
+      }
+      return todo;
     })
+
+    addTodos(newAllTodos);
+    saveAllTodosToLocalStorage(newAllTodos);
   }
 
-  getAllTodosFromLocalStorage = () => {
-    const allTodos = JSON.parse(localStorage.getItem('allTodos')) || [];
+  const removeCompletedTodo = (todoId) => {
+    const newAllTodos = allTodos.filter(todo => todo.id !== todoId);
 
-    this.setState({
-      allTodos: allTodos,
-    })
+    addTodos(newAllTodos);
+    saveAllTodosToLocalStorage(newAllTodos);
   }
 
-  completeTodoHandler = todoId => {
-    this.setState({
-      allTodos: this.state.allTodos
-        .map(todo => {
-          if (todo.id === todoId) {
-            !todo.completed ? todo.completed = true : todo.completed = false;
-          };
-          return todo;
-        })
-    }, () => {
-      localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
-      })
+  const saveAllTodosToLocalStorage = (allTodos) => {
+    localStorage.setItem('allTodos', JSON.stringify(allTodos))
   }
 
-  clearCompletedTodoHandler = () => {
-    const filteredTodo = this.state.allTodos
-      .filter(todo => !todo.completed)
+  const getAllTodosFromLocalStorage = () => {
+    const retrievedAllTodos = JSON.parse(localStorage.getItem('allTodos')) || [];
 
-    this.setState({
-      allTodos: filteredTodo,
-    }, () => {
-      localStorage.setItem('allTodos', JSON.stringify(this.state.allTodos))
-      })
+    addTodos(retrievedAllTodos);
   }
-  
-  render() {
-    return (
-      <div className='app-container'>
-        <div id='todo-title' data-text="Title" contentEditable></div>
-        {
-          this.state.allTodos.length > 0
-          &&
-          <TodoSearch searchTodoHandler={this.searchTodoHandler} />
-        }
-        {
-          this.state.searchPhrase ?
-          <TodoSearchResultsList searchResults={this.state.searchResults} completeTodoHandler={this.completeTodoHandler} />
-          :
-          <TodoList allTodos={this.state.allTodos} completeTodoHandler={this.completeTodoHandler} />
-        }
-        <TodoForm
-          task={this.state.task}
-          todoInputHandler={this.todoInputHandler}
-          addTodoHandler={this.addTodoHandler}
-          clearCompletedTodoHandler={this.clearCompletedTodoHandler}
-        />
-      </div>
-    );
-  }
+
+  return (
+    <div className='app-container'>
+      <div id='todo-title' data-text="Title" contentEditable></div>
+      <TodoList
+        allTodos={allTodos}
+        completeTodoHandler={completeTodoHandler}
+        removeCompletedTodo={removeCompletedTodo}
+      />
+      <TodoForm
+        task={task}
+        todoInputHandler={todoInputHandler}
+        addTodoHandler={addTodoHandler}
+      />
+    </div>
+  )
 }
 
 export default App;

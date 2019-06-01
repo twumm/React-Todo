@@ -56,6 +56,10 @@ html, body {
   background: #FAFAFA;
 }
 
+#root {
+	width: 100%;
+}
+
 @media only screen and (min-width: 501px) {
   #root {
     width: 70%;
