@@ -18,6 +18,7 @@ function App() {
   }
 
   const addTodoHandler = () => {
+    if (!task || !task.trim()) return;
     const todo = {
       task: task,
       id: Date.now(),
